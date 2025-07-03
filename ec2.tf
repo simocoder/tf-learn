@@ -40,3 +40,8 @@ resource "aws_security_group" "allow_ssh" {
   }
 }
 
+output "instance_public_ip" {
+  description = "Public IP address of the EC2 instance"
+  value       = aws_instance.ec2_example.public_ip
+}
+
