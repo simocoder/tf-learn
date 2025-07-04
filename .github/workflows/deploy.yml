@@ -56,11 +56,15 @@ jobs:
         terraform output
 
         echo "Fetching instance_public_ip..."
-        INSTANCE_IP=$(terraform output -raw instance_public_ip 2>&1) || {
-          echo "❌ Failed to get instance_public_ip:"
-          echo "$INSTANCE_IP"
+        INSTANCE_IP=$(terraform output -raw instance_public_ip)
+
+        
+        if [ -z "$INSTANCE_IP" ]; then
+          echo "❌ Failed to get instance_public_ip"
           exit 1
-        }
+        fi
+
+        echo "✅ IP address: $INSTANCE_IP"
         
         mkdir -p ../inventory
         
