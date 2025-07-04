@@ -34,7 +34,7 @@ jobs:
       run: |
         sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
 
-           Add HashiCorp GPG key
+        # Add HashiCorp GPG key
         curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 
         # Add the repo to apt sources
