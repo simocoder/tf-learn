@@ -10,7 +10,7 @@ variable "ami_id" {
   description = "AMI ID for Amazon Linux 2"
   # default     = "ami-0c55b159cbfafe1f0" # Update based on region
   # default     = "ami-0e6874cbf738602e7" # Update based on region, was amazon linux 2???
-  default     = "ami-0e6874cbf738602e7" # Update based on region
+  default     = "ami-078772dab3242ee11" # Update based on region
   
 }
 
