@@ -38,12 +38,10 @@ jobs:
         terraform init
         terraform apply -auto-approve -var="MY_PUBLIC_IP=${{ secrets.MY_PUBLIC_IP }}"
 
-    - name: Extract EC2 IP and build Ansible inventory
+    - name: Install Ansible
       run: |
-        cd terraform
-        INSTANCE_IP=$(terraform output -raw instance_ip)
-        echo "[web]" > ../inventory/hosts.ini
-        echo "$INSTANCE_IP ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/id_rsa" >> ../inventory/hosts.ini
+        sudo apt-get update
+        sudo apt-get install -y ansible
 
     - name: Set up SSH private key
       run: |
@@ -51,11 +49,13 @@ jobs:
         echo "${{ secrets.ANSIBLE_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
 
-    - name: Install Ansible
+    - name: Extract EC2 IP and build Ansible inventory
       run: |
-        sudo apt-get update
-        sudo apt-get install -y ansible
-
+        cd terraform
+        INSTANCE_IP=$(terraform output -raw instance_public_ip)
+        echo "[web]" > ../inventory/hosts.ini
+        echo "$INSTANCE_IP ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/id_rsa" >> ../inventory/hosts.ini
+    
     - name: Run Ansible playbook
       run: |
         ansible-playbook ansible/deploy.yml -i inventory/hosts.ini
