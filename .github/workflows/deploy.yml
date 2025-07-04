@@ -25,5 +25,34 @@ jobs:
       run: |
         python -m unittest discover tests/
 
-    
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v2
+
+    - name: Terraform init & apply
+      run: |
+        cd terraform
+        terraform init
+        terraform apply -auto-approve
+
+    - name: Extract EC2 IP and build Ansible inventory
+      run: |
+        cd terraform
+        INSTANCE_IP=$(terraform output -raw instance_ip)
+        echo "[web]" > ../inventory/hosts.ini
+        echo "$INSTANCE_IP ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/id_rsa" >> ../inventory/hosts.ini
+
+    - name: Set up SSH private key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.ANSIBLE_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+
+    - name: Install Ansible
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ansible
+
+    - name: Run Ansible playbook
+      run: |
+        ansible-playbook ansible/deploy.yml -i inventory/hosts.ini
 
