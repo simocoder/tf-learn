@@ -52,7 +52,19 @@ jobs:
     - name: Extract EC2 IP and build Ansible inventory
       run: |
         cd terraform
-        INSTANCE_IP=$(terraform output -raw instance_public_ip)
+
+        echo "Getting Terraform output..."
+        terraform output
+
+        echo "Fetching instance_public_ip..."
+        INSTANCE_IP=$(terraform output -raw instance_public_ip 2>&1) || {
+          echo "❌ Failed to get instance_public_ip:"
+          echo "$INSTANCE_IP"
+          exit 1
+        }
+        
+        mkdir -p ../inventory
+        
         echo "[web]" > ../inventory/hosts.ini
         echo "$INSTANCE_IP ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/id_rsa" >> ../inventory/hosts.ini
     
