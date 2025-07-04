@@ -21,8 +21,8 @@ resource "aws_security_group" "allow_ssh" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    # cidr_blocks = ["0.0.0.0/0"]  # OR restrict to your IP like ["203.0.113.5/32"]
-    cidr_blocks = ["${var.MY_PUBLIC_IP}/32"]  # OR restrict to your IP like ["203.0.113.5/32"]
+    cidr_blocks = ["0.0.0.0/0"]  # OR restrict to your IP like ["203.0.113.5/32"]
+    # cidr_blocks = ["${var.MY_PUBLIC_IP}/32"]  # OR restrict to your IP like ["203.0.113.5/32"]
     
 
   }
