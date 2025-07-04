@@ -27,5 +27,6 @@ terraform {
 
 provider "aws" {
   region  = var.region
-  profile = "default"  # Change to your AWS CLI profile if needed
+  # profile = "default"  # Change to your AWS CLI profile if needed 
+  # ^^ THIS ONLY WORKS FOR RUNNING LOCALLY!!
 }
