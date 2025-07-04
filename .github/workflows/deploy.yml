@@ -32,7 +32,7 @@ jobs:
       run: |
         cd terraform
         terraform init
-        terraform apply -auto-approve
+        terraform apply -auto-approve -var="MY_PUBLIC_IP=${{ secrets.MY_PUBLIC_IP }}"
 
     - name: Extract EC2 IP and build Ansible inventory
       run: |

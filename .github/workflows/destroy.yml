@@ -1,0 +1,20 @@
+name: Destroy Infrastructure
+
+on:
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  destroy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        run: cd terraform && terraform init
+
+      - name: Terraform Destroy
+        run: cd terraform && terraform destroy -auto-approve -var="MY_PUBLIC_IP=${{ secrets.MY_PUBLIC_IP }}"
