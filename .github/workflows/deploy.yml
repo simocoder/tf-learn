@@ -32,7 +32,18 @@ jobs:
     # info which messed up the INSTANCE_IP=$(terraform output -raw instance_public_ip)
     - name: Install Terraform
       run: |
-        sudo apt-get update && sudo apt-get install -y terraform 
+        sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
+
+           Add HashiCorp GPG key
+        curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+        # Add the repo to apt sources
+        echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+        # Update and install Terraform
+        sudo apt-get update && sudo apt-get install -y terraform
+
+        terraform -version  # Confirm installation
 
     - name: Terraform init & apply
       env:
