@@ -90,10 +90,12 @@ jobs:
         echo "[web]" > ../inventory/hosts.ini
         echo "$INSTANCE_IP ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/id_rsa" >> ../inventory/hosts.ini
 
+        ls -al ~/.ssh/id_rsa
+
 
         echo "This below is hosts.ini..."
         cat ../inventory/hosts.ini
-        echo "This line is at the end of hosts.ini"
+        echo "The line above is the end of hosts.ini"
 
     - name: Install Ansible
       run: |
