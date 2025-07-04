@@ -103,6 +103,8 @@ jobs:
         sudo apt-get install -y ansible       
     
     - name: Run Ansible playbook
+      env:
+        ANSIBLE_HOST_KEY_CHECKING: "False"
       run: |
         ansible-playbook ansible/deploy.yml -i inventory/hosts.ini
 
