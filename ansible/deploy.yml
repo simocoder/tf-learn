@@ -11,7 +11,7 @@
 
     - name: Copy app
       copy:
-        src: app.py
+        src: files/app.py
         dest: /home/ec2-user/app.py
 
     - name: Run app
