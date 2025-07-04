@@ -25,7 +25,7 @@ terraform {
 
 
 
-  }
+  
 
   # To use S3 remote backend instead:
   # backend "s3" {
