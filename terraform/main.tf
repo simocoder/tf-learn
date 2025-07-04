@@ -16,7 +16,7 @@ terraform {
   #  path = "terraform.tfstate"
 
   backend "s3" {
-    bucket         = "my-terraform-state-bucket"
+    bucket         = "my-terraform-state-bucket-1990"
     key            = "tf-learn/terraform.tfstate"
     region         = "ap-southeast-2"
     # dynamodb_table = "my-terraform-locks"   # optional, for state locking
