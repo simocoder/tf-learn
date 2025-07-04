@@ -9,6 +9,7 @@ crash.log
 
 # Local Terraform data
 .terraform/
+terraform/.terraform/
 
 # Override files (rarely used)
 override.tf
@@ -18,7 +19,9 @@ override.tf.json
 
 # CLI config
 .terraformrc
+terraform/.terraformrc
 terraform.rc
+terraform/terraform.rc
 
 # OS/Editor junk
 .DS_Store
