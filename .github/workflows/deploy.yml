@@ -25,7 +25,5 @@ jobs:
       run: |
         python -m unittest discover tests/
 
-    - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v2
-
+    
 
