@@ -12,8 +12,19 @@ terraform {
     }
   }
 
-  backend "local" {
-    path = "terraform.tfstate"
+  #backend "local" {
+  #  path = "terraform.tfstate"
+
+  backend "s3" {
+    bucket         = "my-terraform-state-bucket"
+    key            = "tf-learn/terraform.tfstate"
+    region         = "ap-southeast-2"
+    # dynamodb_table = "my-terraform-locks"   # optional, for state locking
+  }
+
+
+
+
   }
 
   # To use S3 remote backend instead:
