@@ -58,12 +58,13 @@ jobs:
         echo "Fetching instance_public_ip..."
         INSTANCE_IP=$(terraform output -raw instance_public_ip)
 
+        echo "::notice::INSTANCE_IP=<$INSTANCE_IP>"
 
         if [ -z "$INSTANCE_IP" ]; then
           echo "❌ Failed to get instance_public_ip"
           exit 1
         fi
-        
+
 
         echo "✅ IP address: $INSTANCE_IP"
         
