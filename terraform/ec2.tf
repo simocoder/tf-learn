@@ -23,8 +23,14 @@ resource "aws_security_group" "allow_ssh" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]  # OR restrict to your IP like ["203.0.113.5/32"]
     # cidr_blocks = ["${var.MY_PUBLIC_IP}/32"]  # OR restrict to your IP like ["203.0.113.5/32"]
-    
+  }
 
+  ingress {
+    description = "Allow HTTP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # ⚠️ open to all IPs – OK for test/demo, not prod
   }
 
   egress {
