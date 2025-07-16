@@ -109,6 +109,6 @@ jobs:
       run: |
         ansible-playbook ansible/deploy.yml -i inventory/hosts.ini
 
-        echo "✅ IP address: $INSTANCE_IP"
+        echo "✅ IP address of the EC2 instance should be on the line above!"
 
 
