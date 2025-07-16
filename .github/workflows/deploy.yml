@@ -27,7 +27,7 @@ jobs:
         python -m unittest discover tests/
 
     # - name: Set up Terraform
-    #     uses: hashicorp/setup-terraform@v2
+    #     uses: hashicorp/setup-terraform@v2 
 
     # Below is the real terraform, above was a wrapper which output other 
     # info which messed up the INSTANCE_IP=$(terraform output -raw instance_public_ip)
